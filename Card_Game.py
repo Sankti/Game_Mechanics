@@ -15,7 +15,7 @@ class Player:
         return self.mana
 
     def __str__(self):
-        return "Current health: " + str(get_hp(self)) + " | Current mana: " + str(get_mana(self))
+        return "\n --- Player Status ---\n" + "Current health: " + str(Player.get_hp(self)) + " | Current mana: " + str(Player.get_mana(self))
 
 player = Player()
 
@@ -48,6 +48,10 @@ class Enemy():
         self.level = level
         self.name = random.choice(names_list)
         self.species = random.choice(species_list)
+        self.hp = level * 12
+
+        def get_hp(self):
+            return self.hp
 
 
 
@@ -56,3 +60,9 @@ class Enemy():
 class Card():
     def __init__(self, mana_cost):
         self.mana_cost = mana_cost
+
+
+
+# TEST AREA
+
+print(player)
