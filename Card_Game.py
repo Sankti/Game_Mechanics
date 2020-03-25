@@ -52,7 +52,7 @@ class Player:
         return self.hand_size
 
     def __str__(self):
-        return "\n --- Player Status ---\n" + "Current health: " + str(self.get_hp()) + " | Current mana: " + str(self.get_mana())
+        return "\n --- Player Status ---\n" + "Current health: " + str(self.get_hp()) + " | Current mana: " + str(self.get_mana()) + " | Current armor: " + str(self.get_armor())
 
 # SETTING CARDS MECHANICS
 
@@ -84,6 +84,7 @@ class Magic_Bolt(Card):
 
     def play(self, target):
         deal_dmg(5, target)
+        print("The spell hits your enemy!")
     
     def __str__(self):
         return "Deals 5 damage to the opponent."
@@ -99,6 +100,7 @@ class Arcane_Chainmail(Card):
 
     def play(self, target):
         add_armor(2, target)
+        print("The spell adds 2 to your armor value!")
     
     def __str__(self):
         return "Accumulates 2 Armor on caster."
@@ -131,6 +133,7 @@ class Enemy():
         self.name = random.choice(names_list)
         self.species = random.choice(species_list)
         self.hp = level * 12
+        self.armor = 0
 
     def get_hp(self):
         return self.hp
@@ -182,12 +185,14 @@ def play_card(hand, deck):
         card = input("Please type in name of the card to be played (or pass): ")
 
         if card in hand:
-            hand -= card
-            deck -= card
+            hand.remove(card)
+            deck.remove(card)
             if card == "Magic Bolt":
-                card.play(monster)
+                magic_bolts.play(monster)
+                break
             elif card == "Arcane Chainmail":
-                card.play(player)
+                arcane_chainmails.play(player)
+                break
 
 
 
@@ -199,6 +204,11 @@ hand = deal_hand(player.get_hand_size(), deck)
 read_hand(hand)
 
 monster = Enemy(1)
+
+print(player)
+print(monster)
+
+play_card(hand, deck)
 
 print(player)
 print(monster)
