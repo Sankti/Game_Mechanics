@@ -24,7 +24,6 @@ print(skeleton1)
 print(minotaur1)
 
 
-
 # CREATING A SUBCLASS
 
 class Boss(Enemy):    # Subclass inherits all functions from superclass which can be overwritten
